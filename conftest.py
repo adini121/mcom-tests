@@ -3,6 +3,10 @@ from time import strftime
 import mysql
 import pytest
 
+import mysql.connector
+from mysql.connector import Error
+from time import gmtime, strftime
+
 
 def pytest_addoption(parser):
     parser.addoption(

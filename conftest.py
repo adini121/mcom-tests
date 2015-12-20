@@ -1,6 +1,6 @@
 from time import strftime
 
-import mysql
+# import mysql
 import pytest
 
 import mysql.connector

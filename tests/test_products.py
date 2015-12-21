@@ -105,18 +105,6 @@ class TestProductsPage:
         Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
 
     @pytest.mark.nondestructive
-    def test_mozilla_link_urls_are_valid(self, mozwebqa):
-        products_page = ProductsPage(mozwebqa)
-        products_page.go_to_page()
-        bad_urls = []
-        for link in products_page.mozilla_links_list:
-            url = products_page.link_destination(link.get('locator'))
-            response_code = products_page.get_response_code(url)
-            if response_code != requests.codes.ok:
-                bad_urls.append('%s is not a valid url - status code: %s.' % (url, response_code))
-        Assert.equal(0, len(bad_urls), '%s bad urls found: ' % len(bad_urls) + ', '.join(bad_urls))
-
-    @pytest.mark.nondestructive
     def test_developers_link_destinations_are_correct(self, mozwebqa):
         products_page = ProductsPage(mozwebqa)
         products_page.go_to_page()

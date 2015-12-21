@@ -36,18 +36,6 @@ class TestPartners:
         Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
 
     @pytest.mark.nondestructive
-    def test_partner_images_pager_one(self, mozwebqa):
-        partners_page = Partners(mozwebqa)
-        partners_page.go_to_page()
-        bad_images = []
-        Assert.true(partners_page.is_partner_with_us_button_visible)
-        partners_page.click_partner_page_one_button()
-        for image in partners_page.partner_images_pager_list_one:
-            if not partners_page.is_element_visible(*image.get('locator')):
-                bad_images.append('The image at %s is not visible' % image.get('locator')[1:])
-        Assert.equal(0, len(bad_images), '%s bad images found: ' % len(bad_images) + ', '.join(bad_images))
-
-    @pytest.mark.nondestructive
     def test_partner_images_pager_two(self, mozwebqa):
         partners_page = Partners(mozwebqa)
         partners_page.go_to_page()

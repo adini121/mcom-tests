@@ -18,21 +18,6 @@ class TestNotes:
         notes_page.go_to_page()
         Assert.contains("Notes", notes_page.firefox_notes_header_text)
 
-    @pytest.mark.skip_selenium
-    @pytest.mark.nondestructive
-    def test_that_all_links_are_valid(self, mozwebqa):
-        notes_page = Notes(mozwebqa)
-        url = mozwebqa.base_url + notes_page.notes_page_url
-        page_response = requests.get(url)
-        html = BeautifulSoup(page_response.content)
-        bad_urls = []
-        links = html.findAll('a')
-        for link in links:
-            url = self.make_absolute(link['href'], mozwebqa.base_url)
-            response_code = notes_page.get_response_code(url)
-            if response_code != requests.codes.ok:
-                bad_urls.append('%s is not a valid url - status code: %s.' % (url, response_code))
-        Assert.equal(0, len(bad_urls), '%s bad urls found: ' % len(bad_urls) + ', '.join(bad_urls))
 
     def make_absolute(self, url, base_url):
         url = url.strip(" ")

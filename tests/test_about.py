@@ -177,17 +177,4 @@ class TestAboutPage:
                     'Expected current URL to be %s, found %s instead.' %
                     (expected_url, about_page.url_current_page[:len(expected_url)]))
 
-    def test_sign_up_form_privacy_policy_unchecked(self, mozwebqa):
-        about_page = AboutPage(mozwebqa)
-        valid_email = 'noreply@mozilla.com'
-        country = 'US'
-        about_page.go_to_page()
-        expected_url = about_page.url_current_page
-        about_page.expand_sign_up_form()
-        about_page.wait_for_element_visible(*about_page._sign_up_form_privacy_checkbox_locator)
-        about_page.input_email(valid_email)
-        about_page.select_option(country, about_page._sign_up_form_country_select_locator)
-        about_page.submit_form()
-        Assert.true(expected_url == about_page.url_current_page[:len(expected_url)],
-                    'Expected current URL to be %s, found %s instead.' %
-                    (expected_url, about_page.url_current_page[:len(expected_url)]))
+

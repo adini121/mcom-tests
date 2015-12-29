@@ -51,9 +51,9 @@ def session_id(mozwebqa):
     """ Connect to MySQL database """
     try:
         conn = MySQLdb.connect(host='localhost',
-                                ser='root',
-                                passwd='',
-                                db='bedrock_sessionIDs')
+                               user='root',
+                               passwd='',
+                               db='bedrock_sessionIDs')
         # if conn.is_connected():
         #     print('Connected to MySQL database')
 

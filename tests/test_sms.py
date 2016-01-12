@@ -24,29 +24,6 @@ class TestSMSPage():
         Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
 
     @pytest.mark.nondestructive
-    def test_info_link_urls_are_valid(self, mozwebqa):
-        sms_page = SMS(mozwebqa)
-        sms_page.go_to_page()
-        bad_urls = []
-        for link in sms_page.info_links_list:
-            url = sms_page.link_destination(link.get('locator'))
-            response_code = sms_page.get_response_code(url)
-            if response_code != requests.codes.ok:
-                bad_urls.append('%s is not a valid url - status code: %s.' % (url, response_code))
-        Assert.equal(0, len(bad_urls), '%s bad urls found: ' % len(bad_urls) + ', '.join(bad_urls))
-
-    @pytest.mark.nondestructive
-    def test_footer_section(self, mozwebqa):
-        sms_page = SMS(mozwebqa)
-        sms_page.go_to_page()
-        bad_links = []
-        for link in sms_page.Footer.footer_links_list:
-            url = sms_page.link_destination(link.get('locator'))
-            if not url.endswith(link.get('url_suffix')):
-                bad_links.append('%s does not end with %s' % (url, link.get('url_suffix')))
-        Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
-
-    @pytest.mark.nondestructive
     def test_tabzilla_links_are_correct(self, mozwebqa):
         sms_page = SMS(mozwebqa)
         sms_page.go_to_page()

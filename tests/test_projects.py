@@ -58,15 +58,3 @@ class TestProjects:
             if not url.endswith(link.get('url_suffix')):
                 bad_links.append('%s does not end with %s' % (url, link.get('url_suffix')))
         Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
-
-    @pytest.mark.nondestructive
-    def test_projects_link_urls_are_valid(self, mozwebqa):
-        projects_page = Projects(mozwebqa)
-        projects_page.go_to_page()
-        bad_urls = []
-        for link in projects_page.projects_links_list:
-            url = projects_page.link_destination(link.get('locator'))
-            response_code = projects_page.get_response_code(url)
-            if response_code != requests.codes.ok:
-                bad_urls.append('%s is not a valid url - status code: %s.' % (url, response_code))
-        Assert.equal(0, len(bad_urls), '%s bad urls found: ' % len(bad_urls) + ', '.join(bad_urls))

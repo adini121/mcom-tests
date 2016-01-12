@@ -47,57 +47,8 @@ class TestContact:
                     'List of spaces not displayed on spaces tab.')
 
     @pytest.mark.nondestructive
-    def test_spaces_map_marker_visibility(self, mozwebqa):
-        spaces_page = Spaces(mozwebqa)
-        spaces_page.go_to_page()
-        print len(spaces_page.spaces_markers)
-        bad_markers = []
-        for index, space in enumerate(spaces_page.spaces_links):
-            space.click()
-            spaces_page.wait_until_element_visible(spaces_page.spaces_markers[index])
-            if not spaces_page.spaces_markers[index].is_displayed():
-                bad_markers.append('%s marker is not visible.' % space.text)
-        Assert.equal(0, len(bad_markers), '%s bad markers found: '
-                     % len(bad_markers) + ', '.join(bad_markers))
-
-    @pytest.mark.nondestructive
     def test_region_links_are_correct(self, mozwebqa):
         communities_page = Communities(mozwebqa)
         communities_page.go_to_page()
         self.check_bad_links(communities_page, communities_page.region_nav_links_list)
 
-    @pytest.mark.nondestructive
-    def test_region_legend_links_are_correct(self, mozwebqa):
-        communities_page = Communities(mozwebqa)
-        communities_page.go_to_page()
-        Assert.true(communities_page.region_legend.is_displayed(), 'Legend not displayed')
-        self.check_bad_links(communities_page, communities_page.region_legend_links_list)
-
-    @pytest.mark.nondestructive
-    def test_region_dropdown_link(self, mozwebqa):
-        communities_page = Communities(mozwebqa)
-        communities_page.go_to_page()
-        click_regions = [
-            communities_page.click_north_america,
-            communities_page.click_latin_america,
-            communities_page.click_europe,
-            communities_page.click_asia_south_pacific,
-            communities_page.click_africa_middle_east
-        ]
-        region_communities = [
-            communities_page.north_america_communities,
-            communities_page.latin_america_communities,
-            communities_page.europe_communities,
-            communities_page.asia_south_pacific_communities,
-            communities_page.africa_middle_east_communities,
-            communities_page.balkans_communities
-        ]
-        bad_communities = []
-        for index, action in enumerate(click_regions):
-            action()
-            for community in region_communities[index]:
-                communities_page.wait_until_element_visible(community)
-                if not community.is_displayed():
-                    bad_communities.append('%s is not displayed.' % community.text)
-        Assert.equal(0, len(bad_communities), '%s communities not displayed: '
-                     % len(bad_communities) + ', '.join(bad_communities))

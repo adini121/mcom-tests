@@ -12,17 +12,6 @@ from pages.desktop.privacy import Privacy
 class TestPrivacy:
 
     @pytest.mark.nondestructive
-    def test_footer_section(self, mozwebqa):
-        privacy_page = Privacy(mozwebqa)
-        privacy_page.go_to_page()
-        bad_links = []
-        for link in Privacy.Footer.footer_links_list:
-            url = privacy_page.link_destination(link.get('locator'))
-            if not url.endswith(link.get('url_suffix')):
-                bad_links.append('%s does not end with %s' % (url, link.get('url_suffix')))
-        Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
-
-    @pytest.mark.nondestructive
     def test_tabzilla_links_are_correct(self, mozwebqa):
         privacy_page = Privacy(mozwebqa)
         privacy_page.go_to_page()

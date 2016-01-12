@@ -11,17 +11,6 @@ from pages.desktop.home import HomePage
 
 class TestHomePage:
 
-    @pytest.mark.nondestructive
-    def test_promo_links_are_valid(self, mozwebqa):
-        home_page = HomePage(mozwebqa)
-        home_page.go_to_page()
-        bad_urls = []
-        for link in home_page.promo_links_list:
-            url = home_page.link_destination(link.get('locator'))
-            response_code = home_page.get_response_code(url)
-            if response_code != requests.codes.ok:
-                bad_urls.append('%s is not a valid url - status code: %s.' % (url, response_code))
-        Assert.equal(0, len(bad_urls), '%s bad urls found: ' % len(bad_urls) + ', '.join(bad_urls))
 
     @pytest.mark.nondestructive
     def test_major_link_urls_are_valid(self, mozwebqa):
@@ -46,16 +35,6 @@ class TestHomePage:
                 bad_links.append('%s does not end with %s' % (url, link.get('url_suffix')))
         Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
 
-    @pytest.mark.nondestructive
-    def test_footer_link_destinations_are_correct(self, mozwebqa):
-        home_page = HomePage(mozwebqa)
-        home_page.go_to_page()
-        bad_links = []
-        for link in HomePage.Footer.footer_links_list:
-            url = home_page.link_destination(link.get('locator'))
-            if not url.endswith(link.get('url_suffix')):
-                bad_links.append('%s does not end with %s' % (url, link.get('url_suffix')))
-        Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
 
     @pytest.mark.nondestructive
     def test_footer_links_are_valid(self, mozwebqa):

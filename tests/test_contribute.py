@@ -15,17 +15,6 @@ from pages.desktop.contribute import Contribute, Signup
 class TestContribute:
 
     @pytest.mark.nondestructive
-    def test_footer_section(self, mozwebqa):
-        contribute_page = Contribute(mozwebqa)
-        contribute_page.go_to_page()
-        bad_links = []
-        for link in Contribute.Footer.footer_links_list:
-            url = contribute_page.link_destination(link.get('locator'))
-            if not url.endswith(link.get('url_suffix')):
-                bad_links.append('%s does not end with %s' % (url, link.get('url_suffix')))
-        Assert.equal(0, len(bad_links), '%s bad links found: ' % len(bad_links) + ', '.join(bad_links))
-
-    @pytest.mark.nondestructive
     def test_tabzilla_links_are_correct(self, mozwebqa):
         contribute_page = Contribute(mozwebqa)
         contribute_page.go_to_page()
